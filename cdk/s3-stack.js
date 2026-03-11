@@ -7,7 +7,7 @@ class S3UploadStack extends cdk.Stack {
   constructor(scope, id, props) {
     super(scope, id, props);
 
-    // Create S3 bucket
+    // Create S3 bucket (triggered by CI/CD pipeline)
     const bucket = new s3.Bucket(this, "UploadBucket", {
       bucketName: process.env.S3_BUCKET_NAME,
       versioned: true,

@@ -2,6 +2,13 @@ const cdk = require("aws-cdk-lib");
 const { CodePipeline, CodePipelineSource, ShellStep } = require("aws-cdk-lib/pipelines");
 const { S3UploadStack } = require("./s3-stack");
 
+class DeployStage extends cdk.Stage {
+  constructor(scope, id, props) {
+    super(scope, id, props);
+    new S3UploadStack(this, "S3UploadStack", { env: props.env });
+  }
+}
+
 class PipelineStack extends cdk.Stack {
   constructor(scope, id, props) {
     super(scope, id, props);
@@ -18,16 +25,9 @@ class PipelineStack extends cdk.Stack {
       }),
     });
 
-    // Define the deployment stage
-    const deployStage = pipeline.addStage(new cdk.Stage(this, "Deploy", {
+    pipeline.addStage(new DeployStage(this, "Deploy", {
       env: props.env,
     }));
-
-    // Add the S3 Upload Stack to the deployment stage
-    // Note: In a real scenario, you might want to pass specific props here
-    new S3UploadStack(deployStage, "S3UploadStack", {
-      env: props.env,
-    });
   }
 }
 

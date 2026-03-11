@@ -43,8 +43,10 @@ describe("Docker Configuration", () => {
     expect(fs.existsSync(path.join(__dirname, "../upload.sh"))).toBe(true);
   });
 
-  test(".env file exists", () => {
-    expect(fs.existsSync(path.join(__dirname, "../.env"))).toBe(true);
+  test(".env or CI env vars are configured", () => {
+    const envFileExists = fs.existsSync(path.join(__dirname, "../.env"));
+    const ciEnvConfigured = !!process.env.AWS_ACCESS_KEY_ID;
+    expect(envFileExists || ciEnvConfigured).toBe(true);
   });
 
   test(".env.example exists for team onboarding", () => {

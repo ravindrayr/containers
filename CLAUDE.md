@@ -58,3 +58,4 @@ make up && docker-compose logs s3-uploader
 
 ## Important Notes
 - Only create or modify files inside the `containers` folder. Do not create or edit files outside of it.
+- Do NOT perform any git actions (commit, push, pull, branch, etc.) under any circumstances.
