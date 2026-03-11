@@ -1,0 +1,36 @@
+version: "3.9"
+
+services:
+  dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: dev-container
+    env_file:
+      - .env
+    environment:
+      - ENV=development
+    volumes:
+      - .:/app
+    ports:
+      - "3000:3000"
+    stdin_open: true
+    tty: true
+    restart: unless-stopped
+
+  s3-uploader:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: s3-uploader
+    env_file:
+      - .env
+    environment:
+      - ENV=development
+    volumes:
+      - ./uploads:/app/uploads
+      - ./upload.sh:/app/upload.sh
+    depends_on:
+      - dev
+    command: ["bash", "/app/upload.sh"]
+    restart: unless-stopped

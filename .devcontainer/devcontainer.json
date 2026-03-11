@@ -1,0 +1,36 @@
+{
+  "name": "Dev Container",
+  "dockerComposeFile": ["../docker-compose.yml", "../docker-compose.override.yml"],
+  "service": "dev",
+  "workspaceFolder": "/app",
+
+  // VS Code extensions installed automatically for every developer
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "amazonwebservices.aws-toolkit-vscode",  // AWS S3 browser & tools
+        "ms-azuretools.vscode-docker",           // Docker management
+        "mikestead.dotenv",                      // .env file support
+        "editorconfig.editorconfig",             // Consistent code style
+        "eamodio.gitlens"                        // Git tools
+      ],
+      "settings": {
+        "editor.formatOnSave": true,
+        "editor.tabSize": 2,
+        "files.eol": "\n",
+        "terminal.integrated.defaultProfile.linux": "bash"
+      }
+    }
+  },
+
+  // Load environment variables from .env
+  "runArgs": ["--env-file", "${localWorkspaceFolder}/.env"],
+
+  // Run after container starts
+  "postCreateCommand": "echo 'Container ready!'",
+
+  // Mount AWS credentials from host (optional — comment out if using .env instead)
+  "mounts": [
+    "source=${localEnv:HOME}/.aws,target=/root/.aws,type=bind,consistency=cached"
+  ]
+}

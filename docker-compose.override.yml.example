@@ -1,0 +1,13 @@
+# Copy this file to docker-compose.override.yml and customize for your local environment.
+# This file is NOT committed to git.
+
+version: "3.9"
+
+services:
+  dev:
+    volumes:
+      - .:/app
+    ports:
+      - "3000:3000"   # Change if port conflicts on your machine
+    environment:
+      - DEV_NAME=your_name   # Identify yourself in logs
