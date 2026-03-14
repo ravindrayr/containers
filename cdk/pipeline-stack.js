@@ -13,10 +13,17 @@ class PipelineStack extends cdk.Stack {
   constructor(scope, id, props) {
     super(scope, id, props);
 
+    // This is the modern way to connect GitHub to AWS.
+    // Replace with your Connection ARN from AWS Console or use .env
+    const githubConnectionArn = process.env.GITHUB_CONNECTION_ARN || "PASTE_YOUR_CONNECTION_ARN_HERE";
+
     const pipeline = new CodePipeline(this, "Pipeline", {
       pipelineName: "S3UploadPipeline",
       synth: new ShellStep("Synth", {
-        input: CodePipelineSource.gitHub("ravindrayr/containers", "master"),
+        // CodeStar Connection instead of OAuth
+        input: CodePipelineSource.connection("ravindrayr/containers", "master", {
+          connectionArn: githubConnectionArn
+        }),
         commands: [
           "npm ci",
           "npm test",
