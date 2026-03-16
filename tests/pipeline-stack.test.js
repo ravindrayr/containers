@@ -38,9 +38,8 @@ describe("PipelineStack", () => {
           Actions: Match.arrayWith([
             Match.objectLike({
               Configuration: Match.objectLike({
-                Owner: "ravindrayr",
-                Repo: "containers",
-                Branch: "master",
+                FullRepositoryId: "ravindrayr/containers",
+                BranchName: "master",
               }),
             }),
           ]),
