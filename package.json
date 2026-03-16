@@ -8,7 +8,7 @@
     "cdk:destroy": "cdk destroy --app 'node cdk/index.js'",
     "cdk:diff": "cdk diff --app 'node cdk/index.js'",
     "cdk:synth": "cdk synth --app 'node cdk/index.js'",
-    "test": "jest --runInBand",
+    "test": "jest --runInBand --verbose",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage"
   },

@@ -29,6 +29,7 @@ class PipelineStack extends cdk.Stack {
           S3_BUCKET_NAME: process.env.S3_BUCKET_NAME || "",
           AWS_REGION: process.env.AWS_REGION || "us-east-1",
           CDK_DEFAULT_ACCOUNT: process.env.CDK_DEFAULT_ACCOUNT || "",
+          GITHUB_CONNECTION_ARN: process.env.GITHUB_CONNECTION_ARN || "",
         },
         commands: [
           "npm ci",
