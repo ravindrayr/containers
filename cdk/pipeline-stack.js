@@ -24,6 +24,11 @@ class PipelineStack extends cdk.Stack {
         input: CodePipelineSource.connection("ravindrayr/containers", "master", {
           connectionArn: githubConnectionArn
         }),
+        env: {
+          S3_BUCKET_NAME: process.env.S3_BUCKET_NAME || "",
+          AWS_REGION: process.env.AWS_REGION || "us-east-1",
+          CDK_DEFAULT_ACCOUNT: process.env.CDK_DEFAULT_ACCOUNT || "",
+        },
         commands: [
           "npm ci",
           "npm test",

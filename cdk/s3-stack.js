@@ -34,7 +34,6 @@ class S3UploadStack extends cdk.Stack {
         s3deploy.Source.data(fileName, poem),
       ],
       destinationBucket: bucket,
-      destinationKeyPrefix: process.env.S3_UPLOAD_PATH || "uploads/",
     });
 
     // Output bucket name

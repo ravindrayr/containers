@@ -12,7 +12,6 @@ describe("PipelineStack", () => {
 
   beforeAll(() => {
     process.env.S3_BUCKET_NAME = "containeruplods";
-    process.env.S3_UPLOAD_PATH = "";
 
     const app = new cdk.App();
     const stack = new PipelineStack(app, "TestPipelineStack", {

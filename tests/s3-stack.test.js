@@ -20,7 +20,6 @@ describe("S3UploadStack", () => {
 
   beforeAll(() => {
     process.env.S3_BUCKET_NAME = "containeruplods";
-    process.env.S3_UPLOAD_PATH = "";
 
     childProcess.execSync.mockReturnValue(Buffer.from(mockPoem));
 
@@ -75,7 +74,6 @@ describe("S3UploadStack - API fallback", () => {
   beforeAll(() => {
     jest.resetModules();
     process.env.S3_BUCKET_NAME = "containeruplods";
-    process.env.S3_UPLOAD_PATH = "";
 
     const childProcessFresh = require("child_process");
     jest.mock("child_process");

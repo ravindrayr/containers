@@ -9,12 +9,11 @@ set -e
 : "${AWS_REGION:?AWS_REGION is not set}"
 : "${S3_BUCKET_NAME:?S3_BUCKET_NAME is not set}"
 
-UPLOAD_PATH="${S3_UPLOAD_PATH:-uploads/}"
 LOCAL_DIR="/app/uploads"
 
-echo "Uploading files from $LOCAL_DIR to s3://$S3_BUCKET_NAME/$UPLOAD_PATH"
+echo "Uploading files from $LOCAL_DIR to s3://$S3_BUCKET_NAME"
 
-aws s3 cp "$LOCAL_DIR" "s3://$S3_BUCKET_NAME/$UPLOAD_PATH" \
+aws s3 cp "$LOCAL_DIR" "s3://$S3_BUCKET_NAME" \
   --recursive \
   --region "$AWS_REGION"
 

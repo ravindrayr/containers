@@ -12,7 +12,9 @@ describe("Environment Configuration", () => {
   ];
 
   beforeAll(() => {
-    require("dotenv").config({ path: ".env" });
+    if (process.env.CI !== "true") {
+      require("dotenv").config({ path: ".env" });
+    }
   });
 
   test.each(requiredVars)("%s is set", (varName) => {
@@ -20,8 +22,8 @@ describe("Environment Configuration", () => {
     expect(process.env[varName].trim()).not.toBe("");
   });
 
-  test("AWS_ACCESS_KEY_ID starts with AKIA", () => {
-    expect(process.env.AWS_ACCESS_KEY_ID).toMatch(/^AKIA/);
+  test("AWS_ACCESS_KEY_ID starts with AKIA or ASIA", () => {
+    expect(process.env.AWS_ACCESS_KEY_ID).toMatch(/^(AKIA|ASIA)/);
   });
 
   test("AWS_REGION is a valid AWS region format", () => {
