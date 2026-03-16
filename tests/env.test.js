@@ -1,9 +1,12 @@
 /**
  * TDD: Environment Configuration Tests
  * Validates all required AWS env vars are present and correctly formatted
+ * Skipped in CI — CodeBuild uses IAM role credentials, not static keys
  */
 
-describe("Environment Configuration", () => {
+const describeLocal = process.env.CI === "true" ? describe.skip : describe;
+
+describeLocal("Environment Configuration", () => {
   const requiredVars = [
     "AWS_ACCESS_KEY_ID",
     "AWS_SECRET_ACCESS_KEY",
